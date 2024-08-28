@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:datapathConfiguration
+	name="stream_in"
+	bossExecutorReference="stream_boss"
+	workerExecutorReference="stream_in"	
+	channelConfigurationReference="stream_in_config"
+	transport="NIO_SOCKET_SERVER"
+	version="1.0.TEST"
+	xmlns:p="com.ericsson.oss.mediation.engine.netty.core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="com.ericsson.oss.mediation.engine.netty.core com.ericsson.oss.mediation.engine.netty.core.xsd">
+	<components>
+		<component>com.ericsson.eniq.streamterminator.component.decoder.uertt.GPBLengthDecoderComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.indicator.StreamIndicatorComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.statistics.StatisticsComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.multiplex.connector.MultiplexConnectorComponent</component>
+	</components>
+	<address>localhost</address>
+	<port>10101</port>
+</p:datapathConfiguration>

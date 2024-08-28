@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:streamIndicatorConfiguration xmlns:p="com.ericsson.oss.mediation.netty.component.indicator/StreamIndicator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.indicator/StreamIndicator ../../main/resources/stream-indicator.xsd ">
+<!-- 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+This file must be in sync with filter configuration / configuration located in server handshake
+ * all contributions should be present over there
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ -->
+  <contributions>
+    <contribution type="ENODEB">
+      <matcher clazz="com.ericsson.oss.mediation.netty.component.indicator.matcher.AlwaysTrueMatcher" name="ALWAYS_TRUE_GOOD_LUCK" />
+    </contribution>
+  </contributions>
+</p:streamIndicatorConfiguration>

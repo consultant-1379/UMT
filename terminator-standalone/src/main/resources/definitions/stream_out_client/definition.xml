@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:datapathConfiguration
+	name="stream_out_client"
+	version="1.0.TEST"
+	channelConfigurationReference="stream_out_client_config"
+	workerExecutorReference="stream_out_client"
+	transport="NIO_SOCKET_CLIENT"
+	xmlns:p="com.ericsson.oss.mediation.engine.netty.core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="com.ericsson.oss.mediation.engine.netty.core com.ericsson.oss.mediation.engine.netty.core.xsd ">
+	<components>
+		<component>com.ericsson.oss.mediation.netty.component.multiplex.decoder.MultiplexDecoderComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.multiplex.handshake.MultiplexClientHandshakeComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.statistics.StatisticsComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.debugger.DebuggerComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.discard.ReleaseBufferComponent</component>
+	</components>
+	<address>localhost</address>
+	<port>11101</port>
+	<!--  New feature added. Now it is possible to define the address and port that client will use for binding the local address of the socket -->
+	<!-- <clientBindAddress>127.0.0.1</clientBindAddress>
+	<clientBindPort>57006</clientBindPort>  -->
+</p:datapathConfiguration>

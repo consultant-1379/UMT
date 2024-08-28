@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<standaloneConfiguration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="standalone_configuration.xsd">
+ 	<startDatapath>
+   		<datapath>stream_in</datapath>
+		<datapath>stream_out</datapath>
+		<datapath>stream_out_client</datapath>
+	</startDatapath>
+</standaloneConfiguration>

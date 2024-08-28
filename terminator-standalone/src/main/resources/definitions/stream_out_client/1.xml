@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:multiplexClientHandshakeConfiguration 
+xmlns:p="com.ericsson.oss.mediation.netty.component.initialization/handshakeClient" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.initialization/handshakeClient multiplex_handshake_client.xsd ">
+	<fid>0</fid>
+	<gid>1</gid>
+	<uid>0</uid>
+</p:multiplexClientHandshakeConfiguration>

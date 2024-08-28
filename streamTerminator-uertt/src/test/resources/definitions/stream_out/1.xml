@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:clientFilterConfig xmlns:p="com.ericsson.oss.mediation.netty.component.multiplex.handshake/clientFilterConfig" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.multiplex.handshake/clientFilterConfig 
+	com.ericsson.oss.mediation.netty.component.multiplex.handshake_clientFilterConfig.xsd">
+        <clientFilters>
+		<clientGroup groupId="1">
+			<filterSet filterSetId="0">
+				<filter
+					contribution="UERTT"
+					enableFilter="false">
+				</filter>
+			</filterSet>
+		</clientGroup>
+	</clientFilters>
+	<filterContributions>
+		<!-- 
+		Don't use this filter!
+		It's not supposed to work with GPB 
+		 -->
+		<filterConfigContribution
+			contribution="UERTT"
+			eventIDByteCount="2"
+			eventIDOffset="5"
+			eventRecordType="4"
+			recordTypeByteCount="2"
+			recordTypeOffset="2"
+			size="65536" />
+	</filterContributions>
+</p:clientFilterConfig>
+
+
+

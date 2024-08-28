@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:statisticsConfig
+	xmlns:p="com.ericsson.oss.mediation.netty.component.statistics/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.statistics/config com.ericsson.oss.mediation.netty.component.statistics_config.xsd ">
+</p:statisticsConfig>

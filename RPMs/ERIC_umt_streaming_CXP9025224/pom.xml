@@ -1,0 +1,230 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+      <groupId>com.ericsson.eniq.events.streamTerminator</groupId>
+      <artifactId>RPMs</artifactId>
+      <version>1.0</version>
+  </parent>
+
+  <artifactId>ERIC_umt_streaming_CXP9025224</artifactId>
+  <packaging>rpm</packaging>
+
+  <name>Netty Engine - Standalone RPM Packaging</name>
+
+  <properties>
+    <company.name>ericsson</company.name>
+    <rpm.architecture>noarch</rpm.architecture>
+    <rpm.root>opt</rpm.root>
+    <product.name>umt</product.name>
+    <product.install.path>/${rpm.root}/${company.name}/${product.name}</product.install.path>
+    <config.root>etc</config.root>
+    <config.install.path>/${config.root}/${company.name}/config/umt/</config.install.path>
+    <standalone.artifactId>terminator-standalone</standalone.artifactId>
+    <publish_artifact>true</publish_artifact>
+  </properties>
+
+  <dependencies>
+
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>1.7.5</version>
+          <scope>provided</scope>
+      </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>${version.netty}</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+      </plugin>
+
+      <!-- Unpack the Standalone Assembly -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>${standalone.artifactId}</artifactId>
+                  <version>${project.version}</version>
+                  <type>tar.gz</type>
+                  <classifier>bin</classifier>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${project.build.directory}/custom</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+            <name>${project.artifactId}</name>
+          <copyright>2012 Ericsson AB All rights reserved</copyright>
+
+          <versionProperty>${project.version}</versionProperty>
+          <version>${project.version}</version>
+          <packager>Ericsson</packager>
+          <targetOS>linux</targetOS>
+            <needarch>noarch</needarch>
+            <targetVendor>redhat</targetVendor>
+          <group>ERI-NMS</group>
+          <requires>
+            <require>python &gt;= 2.6</require>
+          </requires>
+          <vendor>Ericsson AB</vendor>
+          <url>www.ericsson.com</url>
+
+          <defineStatements>
+            <!-- <defineStatement>_unpackaged_files_terminate_build 0</defineStatement> -->
+          </defineStatements>
+
+          <mappings>
+
+            <mapping>
+              <directory>/${rpm.root}/${company.name}</directory>
+              <filemode>775</filemode>
+              <username>root</username>
+              <groupname>root</groupname>
+            </mapping>
+
+            <!-- Resources and unpacked standalone assembly -->
+            <mapping>
+              <directory>${product.install.path}</directory>
+              <filemode>755</filemode>
+              <username>root</username>
+              <groupname>root</groupname>
+              <configuration>false</configuration>
+              <directoryIncluded>false</directoryIncluded>
+              <recurseDirectories>true</recurseDirectories>
+              <dependency />
+              <sources>
+                <source>
+                  <location>src/main/resources/</location>
+                  <excludes>
+                    <exclude>**/logback.xml</exclude>
+                  </excludes>
+                </source>
+                <source>
+                  <location>target/custom</location>
+                </source>
+              </sources>
+            </mapping>
+
+            <!-- Configuration -->
+            <mapping>
+              <directory>${config.install.path}</directory>
+              <filemode>644</filemode>
+              <username>root</username>
+              <groupname>root</groupname>
+              <configuration>true</configuration>
+              <directoryIncluded>true</directoryIncluded>
+              <recurseDirectories>true</recurseDirectories>
+              <!-- Datapath configuration is installed in a separate RPM so only log configuration is included here. -->
+              <sources>
+                <source>
+                  <location>src/main/resources/logback.xml</location>
+                </source>
+                <source>
+                  <location>src/main/scripts/default-pmstream.conf</location>
+                </source>
+                <source>
+                  <location>src/main/scripts/default-pmstream.ini</location>
+                </source>
+              </sources>
+            </mapping>
+
+            <!-- LSB service script -->
+            <mapping>
+              <directory>/etc/init.d</directory>
+              <filemode>775</filemode>
+              <configuration>false</configuration>
+              <directoryIncluded>false</directoryIncluded>
+              <recurseDirectories>true</recurseDirectories>
+              <username>root</username>
+              <groupname>root</groupname>
+              <sources>
+                <source>
+                  <location>src/main/scripts/pmstream.sh</location>
+                  <destination>pmstream</destination>
+                </source>
+              </sources>
+            </mapping>
+            
+            <!-- LITP clean up script -->
+            <mapping>
+              <directory>/opt/ericsson/nms/litp/bin</directory>
+              <filemode>775</filemode>
+              <configuration>false</configuration>
+              <directoryIncluded>false</directoryIncluded>
+              <recurseDirectories>true</recurseDirectories>
+              <username>root</username>
+              <groupname>root</groupname>
+              <sources>
+                <source>
+                  <location>src/main/scripts/cleanup_pmstream.sh</location>
+                </source>
+              </sources>
+            </mapping>
+          </mappings>
+
+          <preinstallScriptlet>
+            <scriptFile>src/main/scripts/preinstall.sh</scriptFile>
+            <fileEncoding>utf-8</fileEncoding>
+          </preinstallScriptlet>
+          <postinstallScriptlet>
+            <scriptFile>src/main/scripts/postinstall.sh</scriptFile>
+            <fileEncoding>utf-8</fileEncoding>
+          </postinstallScriptlet>
+          <preremoveScriptlet>
+            <scriptFile>src/main/scripts/preremove.sh</scriptFile>
+            <fileEncoding>utf-8</fileEncoding>
+          </preremoveScriptlet>
+          <postremoveScriptlet>
+            <scriptFile>src/main/scripts/postremove.sh</scriptFile>
+            <fileEncoding>utf-8</fileEncoding>
+          </postremoveScriptlet>
+
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

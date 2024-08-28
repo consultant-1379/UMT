@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ericsson.eniq.events.streamTerminator</groupId>
+    <artifactId>uertt</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <name>[${project.artifactId}] Project</name>
+    <url>http://www.ericsson.com</url>
+    <inceptionYear>2014</inceptionYear>
+    <organization>
+        <name>Ericsson</name>
+    </organization>
+
+    <properties>
+        <engine.version>2.1.1</engine.version>
+        <testsuite.version>2.2.1</testsuite.version>
+        <version.netty>4.0.12.Final</version.netty>
+        <version.slf4j>1.7.5</version.slf4j>
+        <version.java>1.7</version.java>
+        <version.junit>4.10</version.junit>
+        <version.logback>1.0.9</version.logback>
+        <version.mockito>1.9.0</version.mockito>
+        <version.yammer>2.2.0</version.yammer>
+        <version.junit>4.11</version.junit>
+    </properties>
+
+
+    <modules>
+        <module>streamTerminator-uertt</module>
+        <module>terminator-standalone</module>
+        <module>testsuite</module>
+    </modules>
+    <profiles>
+        <profile>
+            <activation>
+                <os>
+                    <name>linux</name>
+                    <arch>i386</arch>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <id>UNIX Build</id>
+            <modules>
+                <module>RPMs</module>
+            </modules>
+        </profile>
+    </profiles>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+    </dependencies>
+
+
+    <scm>
+        <tag>Event_Stream_Terminator_uertt-1.0.0</tag>
+    </scm>
+
+</project>

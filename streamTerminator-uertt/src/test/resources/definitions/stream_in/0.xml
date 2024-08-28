@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:eventDecoderConfig xmlns:p="com.ericsson.oss.mediation.netty.component.decoder/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.decoder/config com.ericsson.oss.mediation.netty.component.decoder_config.xsd ">
+</p:eventDecoderConfig>

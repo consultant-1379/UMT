@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:multiplexConnectorConfiguration xmlns:p="com.ericsson.oss.mediation.netty.component.multiplex.connector/multiplexConnector" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.multiplex.connector/multiplexConnector com.ericsson.oss.mediation.netty.component.multiplex.connector_multiplexConnector.xsd ">
+  <connectedDatapath>stream_out</connectedDatapath>
+</p:multiplexConnectorConfiguration>

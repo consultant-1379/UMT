@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:engineConfiguration xmlns:p="com.ericsson.oss.mediation.engine.netty.core"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="com.ericsson.oss.mediation.engine.netty.core com.ericsson.oss.mediation.engine.netty.core.xsd"
+  engineInstanceName="Standalone Instance">
+    <channelsConfiguration>
+    <channelConfigurationSet name="stream_out_config">
+
+      <!-- Channel Configuration for Parent Channel -->
+
+      <!-- <channnelConfiguration> <allowHalfClosure>true</allowHalfClosure> <backLog>0</backLog> <bufferAllocator>POOLED</bufferAllocator> <connectTimeoutMillis>0</connectTimeoutMillis> 
+        <keepAlive>true</keepAlive> <receiveBufferSize>0</receiveBufferSize> <reuseAddress>true</reuseAddress> <sendBufferSize>0</sendBufferSize> <soLinger>0</soLinger> 
+        <soTimeout>0</soTimeout> <tcpNoDelay>true</tcpNoDelay> <trafficClass>0</trafficClass> <writeBufferHighWaterMark>0</writeBufferHighWaterMark> <writeBufferLowWaterMark>0</writeBufferLowWaterMark> 
+        <writeSpinCount>0</writeSpinCount> </channnelConfiguration> -->
+
+      <!-- Channel Configuration for Parent Channel -->
+
+      <childChannelConfiguration xsi:type="baseChannelConfiguration">
+        <writeBufferHighWaterMark>10000000</writeBufferHighWaterMark>
+        <writeBufferLowWaterMark>5000000</writeBufferLowWaterMark>
+        <bufferAllocator>POOLED</bufferAllocator>
+      </childChannelConfiguration>
+    </channelConfigurationSet>
+
+    <channelConfigurationSet name="stream_in_config">
+      <childChannelConfiguration xsi:type="baseChannelConfiguration">
+        <bufferAllocator>POOLED</bufferAllocator>
+      </childChannelConfiguration>
+    </channelConfigurationSet>
+
+    <channelConfigurationSet name="stream_out_client_config">
+      <channnelConfiguration xsi:type="baseChannelConfiguration">
+        <bufferAllocator>POOLED</bufferAllocator>
+      </channnelConfiguration>
+    </channelConfigurationSet>
+
+  </channelsConfiguration>
+
+  <executorConfiguration>
+    <engineExecutorGroup count="1" name="stream_boss" />
+    <engineExecutorGroup count="1" name="stream_in" />
+    <engineExecutorGroup count="1" name="stream_out" />
+    <engineExecutorGroup count="1" name="stream_out_client" />
+  </executorConfiguration>
+  
+  <extension type="com.ericsson.oss.mediation.netty.extension.provider.jaxb.JAXBWatcherExtension" />
+  <extension type="com.ericsson.oss.mediation.netty.extension.metrics.registry.NettyMetricsRegistry">
+     <configuration xsi:type="nettyRegistryConfiguration">       
+       <useLoggerReporter>false</useLoggerReporter> 
+        <useJMXReporter>true</useJMXReporter>
+       	<reportPeriod>1</reportPeriod>
+       	<reportTimeUnit>SECONDS</reportTimeUnit>
+     </configuration> 
+  </extension>
+  
+    <extension type="com.ericsson.oss.mediation.netty.channel.ThreadLocalAccumulatorProvider">
+    <configuration xsi:type="threadLocalAccumulatorProviderConfig">
+	    
+	    <!-- 
+	    
+	    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	    values here may be too low for production purposes
+	    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	     
+	     -->
+    
+      <clientCount>16</clientCount>
+      <bufferSize>1024</bufferSize>
+    </configuration>
+  </extension>
+
+</p:engineConfiguration>

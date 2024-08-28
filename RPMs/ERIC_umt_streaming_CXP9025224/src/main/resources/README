@@ -1,0 +1,5 @@
+The pmstream service requires the following configuration file:
+/etc/ericsson/config/pmstream/pmstream.conf
+
+Each line of this file contains configurations for one instance of the stream terminator.
+If a suitable configuration rpm is not installed then the default configuration will be used.

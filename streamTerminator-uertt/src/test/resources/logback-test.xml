@@ -1,0 +1,45 @@
+<configuration>
+
+  <property
+    name="app_name"
+    value="event-stream-terminator" />
+    
+  <!-- Enable the jmxConfigurator -->
+  <jmxConfigurator />
+
+  <consolePlugin />
+
+
+  <appender
+    name="SYSLOG"
+    class="ch.qos.logback.classic.net.SyslogAppender">
+	<!-- http://logback.qos.ch/manual/appenders.html -->
+	<!-- ${syslogServer:-10.59.132.197} -->
+    <syslogHost>${syslogServer:-0.0.0.0}</syslogHost>
+    <port>${syslogPort:-514}</port>
+    <facility>${syslogFacility:-LOCAL3}</facility>
+    <suffixPattern>[${streamingEngineID:-$app_name}] %logger %msg
+    </suffixPattern>
+  </appender>
+
+  <appender
+    name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+  <logger
+    name="com.ericsson.oss.mediation.netty.extension.metrics.registry.LoggerReporter"
+    level="OFF"
+    additivity="false">
+  </logger>
+
+  <root level="TRACE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="SYSLOG" />
+  </root>
+
+</configuration>

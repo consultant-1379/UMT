@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:datapathConfiguration
+	name="stream_out"
+	bossExecutorReference="stream_boss"
+	workerExecutorReference="stream_out"
+	channelConfigurationReference="stream_out_config"
+	transport="NIO_SOCKET_SERVER"
+	version="1.0.TEST"
+	xmlns:p="com.ericsson.oss.mediation.engine.netty.core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="com.ericsson.oss.mediation.engine.netty.core com.ericsson.oss.mediation.engine.netty.core.xsd">
+	<components>
+		<component>com.ericsson.oss.mediation.netty.component.multiplex.nbichecker.NbiCheckerComponent</component>
+		<component>com.ericsson.oss.mediation.netty.component.multiplex.handshake.MultiplexServerHandshakeComponent</component>
+	</components>
+	<address>localhost</address>
+	<port>11101</port>
+</p:datapathConfiguration>

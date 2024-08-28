@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:nbiCheckerConfiguration
+	xmlns:p="com.ericsson.oss.mediation.netty.component.multiplex.nbichecker/NbiCheckerConfig"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="com.ericsson.oss.mediation.netty.component.multiplex.nbichecker/NbiCheckerConfig com.ericsson.oss.mediation.netty.component.multiplex.nbichecker_NbiCheckerConfig.xsd ">
+	<whiteListedClients>
+		<client>i:*</client> <!-- Allow all ip -->
+	</whiteListedClients>
+</p:nbiCheckerConfiguration>
